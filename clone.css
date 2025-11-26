@@ -3,10 +3,6 @@ body {
   color: white;
 }
 
-.hidden {
-  display: none !important;
-}
-
 textarea {
   background: #222;
   color: #fff;
