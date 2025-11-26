@@ -5,8 +5,42 @@
   <title>Admin Panel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="admin.css">
+
+  <style>
+    .enter-site-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: #0d6efd;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      font-size: 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .enter-site-btn:hover {
+      background: #0b5ed7;
+    }
+
+    nav {
+      margin-top: 50px !important; /* To avoid overlapping button */
+    }
+
+    @media (max-width: 600px) {
+      .enter-site-btn {
+        top: 5px;
+        right: 5px;
+        padding: 6px 10px;
+        font-size: 13px;
+      }
+    }
+  </style>
 </head>
 <body>
+
+<button class="enter-site-btn" onclick="window.location.href='clone.html'">Enter Website</button>
 
 <nav>
   <button onclick="showTab('viewProducts')">📦 View Products</button>
@@ -59,6 +93,7 @@
     <div id="productsList"></div>
   </section>
 </main>
+
 <div id="loginOverlay" class="login-overlay">
   <div class="login-box">
     <h2>Admin Login</h2>
