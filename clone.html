@@ -22,18 +22,17 @@
 </nav>
 
 <div class="container py-4">
-
   <h4 class="text-center mb-4 fw-bold">Paste Order Details</h4>
 
-  <textarea id="orderText" class="form-control mb-3 hidden" rows="10"></textarea>
+  <textarea id="orderText" class="form-control mb-3" rows="10" placeholder="Paste the WhatsApp order message here..."></textarea>
 
   <div class="text-center mb-4">
-    <button id="cloneBtn" class="btn btn-primary px-4" onclick="handleCloneProcess()">Click Here</button>
+    <button class="btn btn-primary px-4" onclick="generateAlbum()">Generate Album</button>
   </div>
 
-  <hr class="hidden" id="separator">
+  <hr>
 
-  <div id="album" class="row g-4 hidden"></div>
+  <div id="album" class="row g-4"></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
