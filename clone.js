@@ -1,17 +1,28 @@
 let imageList = [];
+let step = 0;
 
-async function cloneBill() {
-  try {
-    const text = await navigator.clipboard.readText();  // Auto paste from clipboard
-    document.getElementById("orderText").value = text;
-    generateAlbum();  // Auto generate instantly
+async function handleCloneProcess() {
+  const cloneBtn = document.getElementById("cloneBtn");
+  const textarea = document.getElementById("orderText");
+  const separator = document.getElementById("separator");
+  const albumDiv = document.getElementById("album");
 
-    // Hide input area after generating
-    document.getElementById("orderText").style.display = "none";
-    document.getElementById("cloneBtn").style.display = "none";
-  } 
-  catch (error) {
-    alert("Clipboard access blocked! Please paste manually.");
+  if (step === 0) {
+    try {
+      const text = await navigator.clipboard.readText();
+      textarea.value = text;
+    } catch (err) {
+      alert("Unable to access clipboard. Please paste manually.");
+    }
+
+    textarea.classList.remove("hidden");
+    separator.classList.remove("hidden");
+
+    cloneBtn.innerText = "Clone Bill";  
+    step = 1;
+  } else if (step === 1) {
+    generateAlbum();
+    albumDiv.classList.remove("hidden");
   }
 }
 
@@ -49,7 +60,7 @@ function generateAlbum() {
 
 async function downloadAllImages() {
   if (imageList.length === 0) {
-    alert("No images to download. Clone Bill first.");
+    alert("No images to download. Clone bill first.");
     return;
   }
 
