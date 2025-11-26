@@ -1,4 +1,30 @@
 let imageList = [];
+let step = 0;
+
+async function handleCloneProcess() {
+  const cloneBtn = document.getElementById("cloneBtn");
+  const textarea = document.getElementById("orderText");
+  const separator = document.getElementById("separator");
+  const albumDiv = document.getElementById("album");
+
+  if (step === 0) {
+    try {
+      const text = await navigator.clipboard.readText();
+      textarea.value = text;
+    } catch (err) {
+      alert("Clipboard access blocked. You may need to paste manually.");
+    }
+
+    textarea.classList.remove("hidden");
+    separator.classList.remove("hidden");
+
+    cloneBtn.innerText = "Clone Bill";  
+    step = 1;
+  } else if (step === 1) {
+    generateAlbum();
+    albumDiv.classList.remove("hidden");
+  }
+}
 
 function generateAlbum() {
   const text = document.getElementById("orderText").value;
@@ -7,7 +33,8 @@ function generateAlbum() {
   albumDiv.innerHTML = "";
   imageList = [];
 
-  const pattern = /\d+\.\s*([A-Za-z0-9-]+)\s+(https?:\/\/[^\s]+)/g;
+  // UPDATED PATTERN SUPPORTS *TITLE* FROM WHATSAPP FORMATTING
+  const pattern = /\d+\.\s*\*?([A-Za-z0-9-]+)\*?\s+(https?:\/\/[^\s]+)/g;
   let match;
 
   while ((match = pattern.exec(text)) !== null) {
@@ -34,7 +61,7 @@ function generateAlbum() {
 
 async function downloadAllImages() {
   if (imageList.length === 0) {
-    alert("No images to download. Generate album first.");
+    alert("No images to download. Clone bill first.");
     return;
   }
 
