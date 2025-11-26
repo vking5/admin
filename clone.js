@@ -1,5 +1,20 @@
 let imageList = [];
 
+async function cloneBill() {
+  try {
+    const text = await navigator.clipboard.readText();  // Auto paste from clipboard
+    document.getElementById("orderText").value = text;
+    generateAlbum();  // Auto generate instantly
+
+    // Hide input area after generating
+    document.getElementById("orderText").style.display = "none";
+    document.getElementById("cloneBtn").style.display = "none";
+  } 
+  catch (error) {
+    alert("Clipboard access blocked! Please paste manually.");
+  }
+}
+
 function generateAlbum() {
   const text = document.getElementById("orderText").value;
   const albumDiv = document.getElementById("album");
@@ -34,7 +49,7 @@ function generateAlbum() {
 
 async function downloadAllImages() {
   if (imageList.length === 0) {
-    alert("No images to download. Generate album first.");
+    alert("No images to download. Clone Bill first.");
     return;
   }
 
